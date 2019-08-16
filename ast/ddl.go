@@ -1536,6 +1536,7 @@ const (
 	TableOptionSecondaryEngine
 	TableOptionSecondaryEngineNull
 	TableOptionInsertMethod
+	TableOptionEncryption
 )
 
 // RowFormat types
@@ -1728,6 +1729,13 @@ func (n *TableOption) Restore(ctx *RestoreCtx) error {
 		ctx.WriteKeyWord("INSERT_METHOD ")
 		ctx.WritePlain("= ")
 		ctx.WriteString(n.StrValue)
+	case TableOptionEncryption:
+		ctx.WriteKeyWord("ENCRYPTION ")
+		ctx.WritePlain("= ")
+		if n.StrValue != "Y" {
+
+		}
+		ctx.WriteString(n.StrValue)
 	default:
 		return errors.Errorf("invalid TableOption: %d", n.Tp)
 	}
@@ -1823,7 +1831,7 @@ const (
 	AlterTableRepairPartition
 	AlterTableImportPartitionTablespace
 	AlterTableDiscardPartitionTablespace
-
+	AlterTableEncryption
 	// TODO: Add more actions
 )
 
@@ -2200,6 +2208,10 @@ func (n *AlterTableSpec) Restore(ctx *RestoreCtx) error {
 		if !n.WithValidation {
 			ctx.WriteKeyWord(" WITHOUT VALIDATION")
 		}
+	case AlterTableEncryption:
+		ctx.WriteKeyWord("ENCRYPTION ")
+		ctx.WritePlain("= ")
+
 	default:
 		// TODO: not support
 		ctx.WritePlainf(" /* AlterTableType(%d) is not supported */ ", n.Tp)

@@ -1913,9 +1913,9 @@ func (s *testParserSuite) TestDDL(c *C) {
 		{"create database xxx encryption = N", false, ""},
 
 		// for create table with encryption
-		{"create table t (a int) encryption = 'n'", true, "CREATE TABLE `t` (a int) ENCRYPTION = 'N'"},
-		{"create table t (a int) encryption = 'n', checksum = 0", true, "CREATE TABLE `t` (a int) ENCRYPTION = 'N'"},
-		{"alter table t default char set = utf8mb4 encryption = 'y'", true, "CREATE TABLE `t` DEFAULT CHAR SET = utf8mb4 ENCRYPTION = 'Y'"},
+		{"create table t (a int) encryption = 'N';", true, "CREATE TABLE `t` (a int) ENCRYPTION = 'N'"},
+		{"create table t (a int) encryption = 'N', checksum = 0;", true, "CREATE TABLE `t` (a int) ENCRYPTION = 'N'"},
+		{"alter table t default char set = utf8mb4 encryption = 'y';", true, "ALTER TABLE `t` DEFAULT CHAR SET = utf8mb4 ENCRYPTION = 'Y'"},
 
 		{"create schema xxx", true, "CREATE DATABASE `xxx`"},
 		{"create schema if exists xxx", false, ""},

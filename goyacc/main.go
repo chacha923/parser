@@ -760,6 +760,7 @@ yynewstate:
 			case parser.ActionValueGo:
 				mustFormat(f, "%s", part.Src)
 			case parser.ActionValueDlrDlr:
+				fmt.Printf("%+v %s\n", part, typ)
 				mustFormat(f, "parser.yyVAL.%s", typ)
 				if typ == "" {
 					panic("internal error 002")

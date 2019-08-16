@@ -2990,6 +2990,10 @@ PartDefOption:
 	{
 		$$ = &ast.TableOption{Tp: ast.TableOptionNodegroup, UintValue: $3.(uint64)}
 	}
+|	"ENCRYPTION" EqOpt stringLit
+	{
+		$$ = &ast.TableOption{Tp: ast.TableOptionEncryption, StrValue: $3.(string)}
+	}
 
 PartDefValuesOpt:
 	{
